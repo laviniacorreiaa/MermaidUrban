@@ -39,9 +39,10 @@
     </button>
   </header>
 
-  <!-- BANNER PRINCIPAL -->
-
   <main>
+
+    <!-- BANNER PRINCIPAL -->
+
     <section class="hero" id="inicio">
       <div class="hero-content">
 
@@ -247,6 +248,48 @@
       </form>
 
     </div>
+  </div>
+
+  <!-- GALERIA DE FOTOS DOS PRODUTOS -->
+
+  <div class="photo-modal" id="modalFotos" aria-hidden="true">
+
+    <div class="photo-modal-content">
+
+      <button
+        class="photo-close"
+        onclick="fecharFotos()"
+        aria-label="Fechar galeria"
+      >×</button>
+
+      <div class="photo-product-name" id="nomeFotoProduto"></div>
+
+      <div class="photo-main">
+
+        <button
+          class="photo-arrow photo-prev"
+          onclick="mudarFoto(-1)"
+          aria-label="Foto anterior"
+        >‹</button>
+
+        <img id="fotoAmpliada" src="" alt="">
+
+        <button
+          class="photo-arrow photo-next"
+          onclick="mudarFoto(1)"
+          aria-label="Próxima foto"
+        >›</button>
+
+      </div>
+
+      <div class="photo-counter" id="contadorFotos"></div>
+
+      <div class="photo-thumbnails" id="miniaturasFotos"></div>
+
+      <p class="photo-hint">Clique nas fotos para visualizar os detalhes ✨</p>
+
+    </div>
+
   </div>
 
   <script src="script.js"></script>

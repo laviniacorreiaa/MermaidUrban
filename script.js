@@ -3,20 +3,20 @@
    CONFIGURAÇÕES DA MERMAID URBAN
 ================================== */
 
-// Coloque seu WhatsApp com código do país e DDD.
 const WHATSAPP = "5511994856547";
 
-// Cole aqui seu link de pagamento do Mercado Pago.
-// Exemplo: https://link.mercadopago.com.br/sualoja
 const LINK_PAGAMENTO = "";
 
-// Coloque sua chave Pix, se desejar mostrar no atendimento.
 const CHAVE_PIX = "";
 
 
 /* ==================================
    PRODUTOS
 ================================== */
+
+// Para adicionar fotos, coloque os links dentro de "imagens".
+// Separe cada link por vírgula.
+// A primeira imagem será a foto principal.
 
 const produtos = [
   {
@@ -25,7 +25,10 @@ const produtos = [
     categoria: "Colares",
     descricao: "Inspirado na beleza do oceano",
     preco: 39.90,
-    imagem: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600"
+    ],
     destaque: "MAIS VENDIDO"
   },
   {
@@ -34,7 +37,10 @@ const produtos = [
     categoria: "Brincos",
     descricao: "Delicado e sofisticado",
     preco: 29.90,
-    imagem: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600",
+      "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600"
+    ],
     destaque: "FAVORITO"
   },
   {
@@ -43,7 +49,10 @@ const produtos = [
     categoria: "Pulseiras",
     descricao: "Um toque de verão",
     preco: 34.90,
-    imagem: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600",
+      "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600"
+    ],
     destaque: "NOVO"
   },
   {
@@ -52,7 +61,10 @@ const produtos = [
     categoria: "Bijuterias",
     descricao: "Minimalista e moderno",
     preco: 24.90,
-    imagem: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600",
+      "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600"
+    ],
     destaque: "DESTAQUE"
   },
   {
@@ -61,7 +73,10 @@ const produtos = [
     categoria: "Colares",
     descricao: "Elegância em cada detalhe",
     preco: 44.90,
-    imagem: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600",
+      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600"
+    ],
     destaque: "FAVORITO"
   },
   {
@@ -70,7 +85,10 @@ const produtos = [
     categoria: "Brincos",
     descricao: "Perfeita para qualquer ocasião",
     preco: 32.90,
-    imagem: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600"
+    ],
     destaque: "NOVO"
   },
   {
@@ -79,7 +97,10 @@ const produtos = [
     categoria: "Pulseiras",
     descricao: "Charme e delicadeza",
     preco: 37.90,
-    imagem: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600",
+      "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600"
+    ],
     destaque: "DESTAQUE"
   },
   {
@@ -88,7 +109,10 @@ const produtos = [
     categoria: "Bijuterias",
     descricao: "Seu toque especial",
     preco: 27.90,
-    imagem: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600",
+    imagens: [
+      "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600"
+    ],
     destaque: "NOVO"
   }
 ];
@@ -107,41 +131,76 @@ function moeda(valor) {
   });
 }
 
+
+/* ==================================
+   CARREGAR PRODUTOS
+================================== */
+
 function carregarProdutos(categoria = "Todos") {
+
   const lista = document.getElementById("listaProdutos");
 
   const filtrados = categoria === "Todos"
     ? produtos
     : produtos.filter(p => p.categoria === categoria);
 
-  lista.innerHTML = filtrados.map(produto => `
-    <article class="product">
+  lista.innerHTML = filtrados.map(produto => {
 
-      <div class="product-image">
-        <img
-          src="${produto.imagem}"
-          alt="${produto.nome}"
-          loading="lazy"
-        >
-        <span class="product-tag">${produto.destaque}</span>
-      </div>
+    const imagens = produto.imagens || [produto.imagem];
 
-      <div class="product-info">
-        <h3>${produto.nome}</h3>
-        <p>${produto.descricao}</p>
+    return `
+      <article class="product">
 
-        <div class="price">${moeda(produto.preco)}</div>
+        <div class="product-image">
 
-        <button
-          class="add-button"
-          onclick="adicionarCarrinho(${produto.id})"
-        >
-          + ADICIONAR
-        </button>
-      </div>
+          <button
+            class="product-photo-button"
+            onclick="abrirFotos(${produto.id})"
+            aria-label="Ampliar fotos de ${produto.nome}"
+          >
 
-    </article>
-  `).join("");
+            <img
+              src="${imagens[0]}"
+              alt="${produto.nome}"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint">⌕ VER FOTOS</span>
+
+          </button>
+
+          <span class="product-tag">${produto.destaque}</span>
+
+          ${imagens.length > 1 ? `
+            <span class="photo-count">
+              📷 ${imagens.length} fotos
+            </span>
+          ` : ""}
+
+        </div>
+
+        <div class="product-info">
+
+          <h3>${produto.nome}</h3>
+
+          <p>${produto.descricao}</p>
+
+          <div class="price">${moeda(produto.preco)}</div>
+
+          <button
+            class="add-button"
+            onclick="adicionarCarrinho(${produto.id})"
+          >
+            + ADICIONAR
+          </button>
+
+        </div>
+
+      </article>
+    `;
+
+  }).join("");
+
 }
 
 
@@ -150,6 +209,7 @@ function carregarProdutos(categoria = "Todos") {
 ================================== */
 
 function filtrar(categoria, botao) {
+
   document.querySelectorAll(".filter").forEach(item => {
     item.classList.remove("active");
   });
@@ -157,7 +217,159 @@ function filtrar(categoria, botao) {
   botao.classList.add("active");
 
   carregarProdutos(categoria);
+
 }
+
+
+/* ==================================
+   GALERIA DE FOTOS
+================================== */
+
+let produtoAtual = null;
+let fotoAtual = 0;
+
+function abrirFotos(id) {
+
+  produtoAtual = produtos.find(p => p.id === id);
+
+  if (!produtoAtual) return;
+
+  fotoAtual = 0;
+
+  const modal = document.getElementById("modalFotos");
+
+  modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
+
+  document.body.classList.add("gallery-open");
+
+  atualizarGaleria();
+
+}
+
+
+function atualizarGaleria() {
+
+  if (!produtoAtual) return;
+
+  const imagens = produtoAtual.imagens || [produtoAtual.imagem];
+
+  const imagemPrincipal = document.getElementById("fotoAmpliada");
+
+  imagemPrincipal.src = imagens[fotoAtual];
+  imagemPrincipal.alt = produtoAtual.nome;
+
+  document.getElementById("nomeFotoProduto").textContent =
+    produtoAtual.nome;
+
+  document.getElementById("contadorFotos").textContent =
+    `Foto ${fotoAtual + 1} de ${imagens.length}`;
+
+  const miniaturas = document.getElementById("miniaturasFotos");
+
+  miniaturas.innerHTML = imagens.map((imagem, index) => `
+    <button
+      class="photo-thumbnail ${index === fotoAtual ? "selected" : ""}"
+      onclick="selecionarFoto(${index})"
+      aria-label="Visualizar foto ${index + 1}"
+    >
+      <img src="${imagem}" alt="${produtoAtual.nome} - Foto ${index + 1}">
+    </button>
+  `).join("");
+
+  const temVariasFotos = imagens.length > 1;
+
+  document.querySelector(".photo-prev").style.display =
+    temVariasFotos ? "flex" : "none";
+
+  document.querySelector(".photo-next").style.display =
+    temVariasFotos ? "flex" : "none";
+
+}
+
+
+function selecionarFoto(index) {
+
+  if (!produtoAtual) return;
+
+  fotoAtual = index;
+
+  atualizarGaleria();
+
+}
+
+
+function mudarFoto(direcao) {
+
+  if (!produtoAtual) return;
+
+  const imagens = produtoAtual.imagens || [produtoAtual.imagem];
+
+  fotoAtual += direcao;
+
+  if (fotoAtual >= imagens.length) {
+    fotoAtual = 0;
+  }
+
+  if (fotoAtual < 0) {
+    fotoAtual = imagens.length - 1;
+  }
+
+  atualizarGaleria();
+
+}
+
+
+function fecharFotos() {
+
+  const modal = document.getElementById("modalFotos");
+
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+
+  document.body.classList.remove("gallery-open");
+
+  produtoAtual = null;
+  fotoAtual = 0;
+
+}
+
+
+// Fecha ao clicar fora da imagem.
+
+document.getElementById("modalFotos").addEventListener(
+  "click",
+  function(event) {
+
+    if (event.target === this) {
+      fecharFotos();
+    }
+
+  }
+);
+
+
+// Navegação pelo teclado.
+
+document.addEventListener("keydown", function(event) {
+
+  const modal = document.getElementById("modalFotos");
+
+  if (modal.style.display !== "flex") return;
+
+  if (event.key === "Escape") {
+    fecharFotos();
+  }
+
+  if (event.key === "ArrowRight") {
+    mudarFoto(1);
+  }
+
+  if (event.key === "ArrowLeft") {
+    mudarFoto(-1);
+  }
+
+});
 
 
 /* ==================================
@@ -165,22 +377,28 @@ function filtrar(categoria, botao) {
 ================================== */
 
 function adicionarCarrinho(id) {
+
   const produto = produtos.find(p => p.id === id);
 
   const existente = carrinho.find(p => p.id === id);
 
   if (existente) {
+
     existente.quantidade++;
+
   } else {
+
     carrinho.push({
       ...produto,
       quantidade: 1
     });
+
   }
 
   atualizarCarrinho();
 
   alert(produto.nome + " adicionado ao carrinho! 🐚");
+
 }
 
 
@@ -189,6 +407,7 @@ function adicionarCarrinho(id) {
 ================================== */
 
 function atualizarCarrinho() {
+
   const quantidade = carrinho.reduce(
     (soma, item) => soma + item.quantidade,
     0
@@ -208,22 +427,32 @@ function atualizarCarrinho() {
   const container = document.getElementById("itensCarrinho");
 
   if (carrinho.length === 0) {
+
     container.innerHTML = "<p>Seu carrinho está vazio. 💙</p>";
+
     return;
+
   }
 
   container.innerHTML = carrinho.map(item => `
     <div class="cart-item">
 
       <div class="cart-item-info">
+
         <strong>${item.nome}</strong>
+
         <p>${moeda(item.preco)} cada</p>
 
         <div class="quantity-controls">
+
           <button onclick="alterarQuantidade(${item.id}, -1)">−</button>
+
           <span>${item.quantidade}</span>
+
           <button onclick="alterarQuantidade(${item.id}, 1)">+</button>
+
         </div>
+
       </div>
 
       <strong>${moeda(item.preco * item.quantidade)}</strong>
@@ -234,6 +463,7 @@ function atualizarCarrinho() {
 
     </div>
   `).join("");
+
 }
 
 
@@ -242,6 +472,7 @@ function atualizarCarrinho() {
 ================================== */
 
 function alterarQuantidade(id, valor) {
+
   const item = carrinho.find(p => p.id === id);
 
   if (!item) return;
@@ -249,10 +480,15 @@ function alterarQuantidade(id, valor) {
   item.quantidade += valor;
 
   if (item.quantidade <= 0) {
+
     removerItem(id);
+
   } else {
+
     atualizarCarrinho();
+
   }
+
 }
 
 
@@ -261,8 +497,11 @@ function alterarQuantidade(id, valor) {
 ================================== */
 
 function removerItem(id) {
+
   carrinho = carrinho.filter(p => p.id !== id);
+
   atualizarCarrinho();
+
 }
 
 
@@ -271,13 +510,18 @@ function removerItem(id) {
 ================================== */
 
 function abrirCarrinho() {
+
   atualizarCarrinho();
 
   document.getElementById("modalCarrinho").style.display = "flex";
+
 }
 
+
 function fecharCarrinho() {
+
   document.getElementById("modalCarrinho").style.display = "none";
+
 }
 
 
@@ -286,9 +530,13 @@ function fecharCarrinho() {
 ================================== */
 
 function irCheckout() {
+
   if (carrinho.length === 0) {
+
     alert("Seu carrinho está vazio!");
+
     return;
+
   }
 
   fecharCarrinho();
@@ -297,17 +545,24 @@ function irCheckout() {
     moeda(calcularTotal());
 
   document.getElementById("modalCheckout").style.display = "flex";
+
 }
+
 
 function fecharCheckout() {
+
   document.getElementById("modalCheckout").style.display = "none";
+
 }
 
+
 function calcularTotal() {
+
   return carrinho.reduce(
     (soma, item) => soma + item.preco * item.quantidade,
     0
   );
+
 }
 
 
@@ -316,6 +571,7 @@ function calcularTotal() {
 ================================== */
 
 function gerarMensagem(nome, telefone, endereco, pagamento) {
+
   let mensagem = "🐚 *NOVO PEDIDO - MERMAID URBAN* 🐚\n\n";
 
   mensagem += "*CLIENTE:* " + nome + "\n";
@@ -325,20 +581,25 @@ function gerarMensagem(nome, telefone, endereco, pagamento) {
   mensagem += "*PRODUTOS:*\n";
 
   carrinho.forEach(item => {
+
     mensagem +=
       `${item.quantidade}x ${item.nome} - ${moeda(item.preco * item.quantidade)}\n`;
+
   });
 
   mensagem += "\n*TOTAL: " + moeda(calcularTotal()) + "*\n";
   mensagem += "*PAGAMENTO:* " + pagamento + "\n\n";
 
   if (pagamento === "Pix" && CHAVE_PIX) {
+
     mensagem += "*CHAVE PIX:* " + CHAVE_PIX + "\n\n";
+
   }
 
   mensagem += "Olá! Gostaria de confirmar meu pedido. 💙";
 
   return mensagem;
+
 }
 
 
@@ -353,33 +614,48 @@ document.getElementById("checkoutForm").addEventListener(
     event.preventDefault();
 
     if (carrinho.length === 0) {
+
       alert("Seu carrinho está vazio!");
+
       return;
+
     }
 
     const nome = document.getElementById("nome").value.trim();
+
     const telefone = document.getElementById("telefoneCliente").value.trim();
+
     const endereco = document.getElementById("endereco").value.trim();
+
     const pagamento = document.getElementById("pagamento").value;
 
     if (!nome || !telefone || !endereco || !pagamento) {
+
       alert("Preencha todos os campos!");
+
       return;
+
     }
 
     if (!/^55\d{10,11}$/.test(WHATSAPP)) {
+
       alert("Configure o número correto do WhatsApp da loja no script.js.");
+
       return;
+
     }
 
     if (
       pagamento === "Pagamento online" &&
       !LINK_PAGAMENTO.trim()
     ) {
+
       alert(
         "O link de pagamento ainda não foi configurado. Escolha Pix ou combinar pelo WhatsApp."
       );
+
       return;
+
     }
 
     const mensagem = gerarMensagem(
@@ -395,7 +671,6 @@ document.getElementById("checkoutForm").addEventListener(
 
     if (pagamento === "Pagamento online") {
 
-      // Abre o checkout previamente configurado pela loja.
       window.open(LINK_PAGAMENTO, "_blank");
 
     }
@@ -413,9 +688,13 @@ document.getElementById("checkoutForm").addEventListener(
 ================================== */
 
 function irWhatsApp() {
+
   if (!/^55\d{10,11}$/.test(WHATSAPP)) {
+
     alert("Configure o WhatsApp da loja no script.js.");
+
     return;
+
   }
 
   const mensagem = encodeURIComponent(
@@ -426,6 +705,7 @@ function irWhatsApp() {
     "https://wa.me/" + WHATSAPP + "?text=" + mensagem,
     "_blank"
   );
+
 }
 
 
@@ -434,4 +714,5 @@ function irWhatsApp() {
 ================================== */
 
 carregarProdutos();
+
 atualizarCarrinho();
