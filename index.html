@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Mermaid Urban - Acessórios inspirados no mar, no verão e na sua personalidade.">
+
+  <title>Mermaid Urban | Sea, Summer & Style</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- CABEÇALHO -->
+
+  <header class="header">
+    <a href="#inicio" class="logo">
+      MERMAID <span>URBAN</span>
+      <small>SEA • SUMMER • STYLE</small>
+    </a>
+
+    <nav class="navigation">
+      <a href="#inicio">Início</a>
+      <a href="#colecao">Coleção</a>
+      <a href="#sobre">Nossa história</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <button class="cart-button" onclick="abrirCarrinho()">
+      🛍️ <span id="contador">0</span>
+    </button>
+  </header>
+
+  <!-- BANNER PRINCIPAL -->
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+
+        <span class="eyebrow">☀️ SUA NOVA ESTAÇÃO COMEÇA AQUI</span>
+
+        <h1>
+          O verão passa.<br>
+          Seu <span>brilho fica.</span>
+        </h1>
+
+        <p>
+          Acessórios inspirados na beleza do oceano
+          para deixar cada momento ainda mais especial.
+        </p>
+
+        <a href="#colecao" class="primary-button">
+          DESCOBRIR COLEÇÃO →
+        </a>
+
+        <div class="hero-note">
+          ✨ Detalhes que fazem você brilhar.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+
+    <section class="benefits">
+      <div>🐚 Inspiração no mar</div>
+      <div>💎 Acessórios especiais</div>
+      <div>☀️ Estilo em todas as estações</div>
+    </section>
+
+    <!-- COLEÇÃO -->
+
+    <section class="collection section" id="colecao">
+
+      <div class="section-heading">
+        <span>MERMAID COLLECTION</span>
+        <h2>Encontre seu próximo favorito</h2>
+        <p>Pequenos detalhes, grandes encantos.</p>
+      </div>
+
+      <div class="filters">
+        <button class="filter active" onclick="filtrar('Todos', this)">Todos</button>
+        <button class="filter" onclick="filtrar('Colares', this)">Colares</button>
+        <button class="filter" onclick="filtrar('Brincos', this)">Brincos</button>
+        <button class="filter" onclick="filtrar('Pulseiras', this)">Pulseiras</button>
+        <button class="filter" onclick="filtrar('Bijuterias', this)">Bijuterias</button>
+      </div>
+
+      <div class="products" id="listaProdutos"></div>
+
+    </section>
+
+    <!-- BANNER SECUNDÁRIO -->
+
+    <section class="summer-banner">
+      <div>
+        <span>THE SUMMER EDIT</span>
+        <h2>Um toque de mar<br>em cada detalhe.</h2>
+        <a href="#colecao" class="light-button">VER ACESSÓRIOS</a>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+
+    <section class="about section" id="sobre">
+
+      <div class="about-image">
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900"
+          alt="Praia de águas azuis"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="about-content">
+        <span>UM POUCO SOBRE NÓS</span>
+        <h2>Seu estilo é sua própria maré.</h2>
+
+        <p>
+          A Mermaid Urban nasceu para celebrar a beleza
+          dos pequenos detalhes.
+        </p>
+
+        <p>
+          Inspirados pelo oceano, pela liberdade e pela
+          energia do verão, selecionamos acessórios para
+          acompanhar sua personalidade em todos os momentos.
+        </p>
+
+        <a href="#colecao" class="primary-button">
+          CONHECER A LOJA
+        </a>
+      </div>
+
+    </section>
+
+    <!-- CONTATO -->
+
+    <section class="contact" id="contato">
+      <span>VAMOS CONVERSAR?</span>
+      <h2>Seu próximo acessório favorito está aqui.</h2>
+      <p>Escolha suas peças e faça seu pedido com a gente!</p>
+
+      <a href="#" onclick="irWhatsApp(); return false;" class="primary-button">
+        FALAR PELO WHATSAPP
+      </a>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ -->
+
+  <footer>
+    <a href="#inicio" class="logo footer-logo">
+      MERMAID <span>URBAN</span>
+      <small>SEA • SUMMER • STYLE</small>
+    </a>
+
+    <p>A beleza do mar em cada detalhe. 🐚</p>
+
+    <div class="footer-links">
+      <a href="#inicio">Início</a>
+      <a href="#colecao">Produtos</a>
+      <a href="#contato">Contato</a>
+    </div>
+
+    <small>© 2026 Mermaid Urban. Todos os direitos reservados.</small>
+  </footer>
+
+  <!-- CARRINHO -->
+
+  <div class="modal" id="modalCarrinho">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2>Seu carrinho 🛍️</h2>
+        <button onclick="fecharCarrinho()" class="close">×</button>
+      </div>
+
+      <div id="itensCarrinho"></div>
+
+      <div class="cart-total">
+        <span>Total do pedido</span>
+        <strong id="total">R$ 0,00</strong>
+      </div>
+
+      <button class="primary-button full-button" onclick="irCheckout()">
+        CONTINUAR PEDIDO
+      </button>
+
+    </div>
+  </div>
+
+  <!-- FINALIZAÇÃO -->
+
+  <div class="modal" id="modalCheckout">
+
+    <div class="modal-content checkout-content">
+
+      <div class="modal-header">
+        <h2>Finalizar pedido 💙</h2>
+        <button onclick="fecharCheckout()" class="close">×</button>
+      </div>
+
+      <form id="checkoutForm">
+
+        <label for="nome">Seu nome</label>
+        <input id="nome" type="text" placeholder="Digite seu nome" required>
+
+        <label for="telefoneCliente">Seu WhatsApp</label>
+        <input id="telefoneCliente" type="tel" placeholder="(11) 99999-9999" required>
+
+        <label for="endereco">Endereço de entrega</label>
+        <textarea id="endereco" placeholder="Rua, número, bairro e cidade" required></textarea>
+
+        <label for="pagamento">Forma de pagamento</label>
+
+        <select id="pagamento" required>
+          <option value="">Escolha uma opção</option>
+          <option value="Pagamento online">Pagamento online</option>
+          <option value="Pix">Pix</option>
+          <option value="Combinar pelo WhatsApp">Combinar pelo WhatsApp</option>
+        </select>
+
+        <div class="payment-info">
+          <span>🔒 Compra acompanhada pelo WhatsApp</span>
+          <p>Você poderá confirmar os detalhes do pedido diretamente com a loja.</p>
+        </div>
+
+        <div class="checkout-total">
+          Total: <strong id="checkoutTotal">R$ 0,00</strong>
+        </div>
+
+        <button type="submit" class="primary-button full-button">
+          CONFIRMAR MEU PEDIDO
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
